@@ -8,7 +8,7 @@ describe('Math Library Express Integration', () => {
   beforeAll(async () => {
     try {
       await request(BASE_URL).get('/');
-    } catch (error) {
+    } catch {
       throw new Error('Server must be running to execute these tests');
     }
   });
