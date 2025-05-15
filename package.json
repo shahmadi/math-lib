@@ -6,8 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "jest",
-    "test:integration": "jest test/integration.test.js",
+    "test": "jest test/unit",
+    "test:unit": "jest test/unit",
+    "test:integration": "jest test/integration",
     "start:example": "cd example && npm start"
   },
   "keywords": [],
