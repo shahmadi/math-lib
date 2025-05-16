@@ -11,7 +11,7 @@ const COGNITO_CLIENT_ID = process.env.COGNITO_CLIENT_ID;
 const TEST_USERNAME = process.env.COGNITO_TEST_USERNAME;
 const TEST_PASSWORD = process.env.COGNITO_TEST_PASSWORD;
 const COGNITO_CLIENT_SECRET = process.env.COGNITO_CLIENT_SECRET;
-const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
+const AWS_REGION = process.env.AWS_REGION;
 AWS.config.update({
   region: AWS_REGION
 });
