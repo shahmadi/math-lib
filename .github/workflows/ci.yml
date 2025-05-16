@@ -27,10 +27,43 @@ jobs:
     - name: Unit Tests
       run: npm run test:unit
 
-  # Second job: Run Express app and Integration Tests
-  integration:
-    needs: unit-test  # This job will run only after 'test' job succeeds
+  # # Second job: Run Express app and Integration Tests
+  # integration:
+  #   needs: unit-test  # This job will run only after 'test' job succeeds
+  #   runs-on: ubuntu-latest
+    
+  #   steps:
+  #   - uses: actions/checkout@v3
+    
+  #   - name: Setup Node.js
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: '18'
+  #       cache: 'npm'
+
+  #   - name: Install dependencies
+  #     run: |
+  #       npm ci
+  #       cd example && npm ci
+
+  #   - name: Start Express App
+  #     run: cd example && npm start &
+
+  #   - name: Wait for server to start
+  #     run: |
+  #       echo "Waiting for server to start..."
+  #       sleep 10
+
+  #   - name: Run Integration Tests
+  #     run: npm run test:integration
+  integration-matrix:
+    needs: unit-test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        express-version: ['4.17.1', '4.18.0', 'latest']
+    
+    name: Integration Test (Express v${{ matrix.express-version }})
     
     steps:
     - uses: actions/checkout@v3
@@ -41,18 +74,21 @@ jobs:
         node-version: '18'
         cache: 'npm'
 
-    - name: Install dependencies
+    - name: Install main library dependencies
+      run: npm ci
+
+    - name: Install example app dependencies with specific Express version
       run: |
-        npm ci
-        cd example && npm ci
+        cd example
+        npm install
+        npm install express@${{ matrix.express-version }}
+        npm ls express
 
     - name: Start Express App
       run: cd example && npm start &
 
-    - name: Wait for server to start
-      run: |
-        echo "Waiting for server to start..."
-        sleep 10
+    - name: Wait for server
+      run: sleep 10
 
     - name: Run Integration Tests
       run: npm run test:integration
