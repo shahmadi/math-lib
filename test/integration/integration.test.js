@@ -61,6 +61,10 @@ describe('Math Library Express Integration', () => {
     try {
       // First check if server is running
       await request(BASE_URL).get('/');
+
+      console.log("aval in ", COGNITO_CLIENT_ID);
+      console.log("badesh username", TEST_USERNAME);
+      console.log("Badesh region", AWS_REGION);
       
       // Then get the auth token
       authToken = await getCognitoToken();
@@ -82,6 +86,7 @@ describe('Math Library Express Integration', () => {
       genre: 'Rock',
       bio: 'This is a test artist biography'
     };
+
 
     const response = await request(BASE_URL)
       .post('/artists')
