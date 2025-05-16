@@ -13,7 +13,7 @@ describe('Math Library Express Integration', () => {
     }
   });
 
-  test.skip('GET /add/:a/:b returns correct sum', async () => {
+  test('GET /add/:a/:b returns correct sum', async () => {
     const response = await request(BASE_URL)
       .get('/add/5/3')
       .expect('Content-Type', /json/)
@@ -22,7 +22,7 @@ describe('Math Library Express Integration', () => {
     expect(response.body).toEqual({ result: 8 });
   });
 
-  test.skip('handles negative numbers', async () => {
+  test('handles negative numbers', async () => {
     const response = await request(BASE_URL)
       .get('/add/-5/3')
       .expect(200);
