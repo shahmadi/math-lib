@@ -65,7 +65,7 @@ describe('Math Library Express Integration', () => {
       // Then get the auth token
       authToken = await getCognitoToken();
 
-      console.log('GOT THE Token:', authToken); 
+      console.log('GOT THE Token yoo:', authToken); 
     } catch (error) {
       if (!authToken) {
         console.error('Failed to get Cognito token:', error);
